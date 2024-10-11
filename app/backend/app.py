@@ -34,7 +34,8 @@ if __name__ == "__main__":
                           "Always use the following step-by-step instructions to respond: \n" + \
                           "1. Always use the 'search' tool to check the knowledge base before answering a question. \n" + \
                           "2. Always use the 'report_grounding' tool to report the source of information from the knowledge base. \n" + \
-                          "3. Produce an answer that's as short as possible. If the answer isn't in the knowledge base, say you don't know."
+                          "3. Produce an answer that's as short as possible. If the answer isn't in the knowledge base, say you don't know. \n" + \
+                          "4. If the user asks about customer and order details you will use the 'search' tool to find the information."
     attach_rag_tools(rtmt, search_endpoint, search_index, AzureKeyCredential(search_key) if search_key else credentials)
 
     rtmt.attach_to_app(app, "/realtime")

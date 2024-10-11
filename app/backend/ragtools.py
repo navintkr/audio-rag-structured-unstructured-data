@@ -99,7 +99,7 @@ async def _search_tool(search_client: SearchClient, args: Any) -> ToolResult:
                 "Always make sure the query results not more than 100 best rows so that I wont exceed context length when passing to LLM again. " +\
                 "Do not add ``` or backticks to the sql query that your are generating. The query is for Azure SQL so dont add LIMIT instead use TOP or OFFSET 0 ROWS FETCH NEXT 100 ROWS ONLY. Example Queries: " +\
                 "Query: Give the list of customers who ordered at least once. SQL:SELECT TOP 10 CustomerName FROM dbo.Customers WHERE CustomerID IN (SELECT DISTINCT CustomerID FROM dbo.Orders) ORDER BY CustomerID; " +\
-                "Query: Give me the list of customers who ordered twice. SQL:SELECT C.CustomerID, C.CustomerName, C.Email FROM dbo.Customers C JOIN dbo.Orders O ON C.CustomerID = O.CustomerID GROUP BY C.CustomerID, C.CustomerName, C.Email HAVING COUNT(O.OrderID) = 2;" +\
+                "Query: Give me the list of customers who ordered twice. SQL:SELECT c.CustomerID, c.CustomerName, c.Email FROM Customers c JOIN Orders o ON c.CustomerID = o.CustomerID GROUP BY c.CustomerID, c.CustomerName, c.Email HAVING COUNT(o.OrderID) >= 2;" +\
                 "Query: How can I retrieve the names and emails of all customers who have placed an order? SQL: SELECT DISTINCT c.CustomerName, c.Email FROM Customers c JOIN Orders o ON c.CustomerID = o.CustomerID; "
                 
                 ),
