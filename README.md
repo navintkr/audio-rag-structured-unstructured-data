@@ -1,27 +1,28 @@
-# VoiceRAG: An Application Pattern for RAG + Voice Using Azure AI Search and the GPT-4o Realtime API for Audio
+# VoiceRAG: For Structured and Unstructured Data
 
 [![Open in GitHub Codespaces](https://img.shields.io/static/v1?style=for-the-badge&label=GitHub+Codespaces&message=Open&color=brightgreen&logo=github)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&skip_quickstart=true&machine=basicLinux32gb&repo=860141324&devcontainer_path=.devcontainer%2Fdevcontainer.json&geo=WestUs2)
-[![Open in Dev Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/Azure-Samples/aisearch-openai-rag-audio)
+[![Open in Dev Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/navintkr/audio-rag-structured-unstructured-data)
 
 This repo contains an example of how to implement RAG support in applications that use voice as their user interface, powered by the GPT-4o realtime API for audio. We describe the pattern in more detail in [this blog post](https://aka.ms/voicerag), and you can see this sample app in action in [this short video](https://youtu.be/vXJka8xZ9Ko).
 
-![RTMTPattern](docs/RTMTPattern.png)
+![Pattern](docs/RTMTPattern.png)
 
 ## Running this sample
-We'll follow 4 steps to get this example running in your own environment: pre-requisites, creating an index, setting up the environment, and running the app.
+We'll follow 4 steps to get this example running in your own environment: pre-requisites, creating an index (for Unstructured Data), Setting up SQL with data, setting up the environment, and running the app.
 
 ### 1. Pre-requisites
 You'll need instances of the following Azure services. You can re-use service instances you have already or create new ones.
-1. [Azure OpenAI](https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesOpenAI), with 2 model deployments, one of the **gpt-4o-realtime-preview** model, and one for embeddings (e.g.text-embedding-3-large, text-embedding-3-small, or text-embedding-ada-002)
+1. [Azure OpenAI](https://ms.portal.azure.com/#create/Microsoft.CognitiveServicesOpenAI), with 3 model deployments, one of the **gpt-4o-realtime-preview** model, one for embeddings (e.g.text-embedding-3-large, text-embedding-3-small, or text-embedding-ada-002) and one GPT 4O
 1. [Azure AI Search](https://ms.portal.azure.com/#create/Microsoft.Search), any tier Basic or above will work, ideally with [Semantic Search enabled](https://learn.microsoft.com/azure/search/semantic-how-to-enable-disable)
 1. [Azure Blob Storage](https://ms.portal.azure.com/#create/Microsoft.StorageAccount-ARM), with a container that has the content that represents your knowledge base (we include some sample data in this repo if you want an easy starting point)
+1. [Azure SQL](https://ms.portal.azure.com/#create/Microsoft.SQLDatabase), refer data/structured/SQL DDL and Sample Data.txt in this repo for DDL and SQL INsert statements.
 
-### 2. Creating an index
+### 2. Creating an index for Unstructured Data
 RAG applications use a retrieval system to get the right grounding data for LLMs. We use Azure AI Search as our retrieval system, so we need to get our knowledge base (e.g. documents or any other content you want the app to be able to talk about) into an Azure AI Search index.
 
 **If you already have an Azure AI Search index**
 
-You can use an existing index directly. If you created that index using the "Import and vectorize data" option in the portal, no further changes are needed. Otherwise, you'll need to update the field names in the [code](https://github.com/Azure-Samples/aisearch-openai-rag-audio/blob/main/app/backend/ragtools.py) to match your text/vector fields.
+You can use an existing index directly. If you created that index using the "Import and vectorize data" option in the portal, no further changes are needed. Otherwise, you'll need to update the field names in the [code](https://github.com/navintkr/audio-rag-structured-unstructured-data/blob/main/app/backend/ragtools.py) to match your text/vector fields.
 
 **Creating a new index with sample data or your own**
 
@@ -33,6 +34,8 @@ Follow these steps to create a new index. We'll create a setup where once create
 
 For more details on ingesting data in Azure AI Search using "Import and vectorize data", here's a [quickstart](https://learn.microsoft.com/en-us/azure/search/search-get-started-portal-import-vectors).
 
+### 2.1 Use the SQL Scripts "data/structured" to load the data
+
 ### 3. Setting up the environment
 The app needs to know which service endpoints to use for the Azure OpenAI and Azure AI Search. The following variables can be set as environment variables, or you can create a ".env" file in the "app/backend/" directory with this content.
    ```
@@ -42,6 +45,11 @@ The app needs to know which service endpoints to use for the Azure OpenAI and Az
    AZURE_SEARCH_ENDPOINT=https://<your service name>.search.windows.net
    AZURE_SEARCH_INDEX=<your index name>
    AZURE_SEARCH_API_KEY=<your api key>
+   OPENAI_CHAT_MODEL=gpt-4o
+   AZURE_SQL_SERVER=<your-SQL-Server-Name>
+   AZURE_SQL_DB=<your-SQL-DB-Name>
+   AZURE_SQL_USERNAME=<your-SQL-Server-Username>
+   AZURE_SQL_PWD=<your-SQL-Server-Password>
    ```
    To use Entra ID (your user when running locally, managed identity when deployed) simply don't set the keys. 
 
@@ -60,7 +68,7 @@ You can run the project in your local VS Code Dev Container using the [Dev Conta
 1. Start Docker Desktop (install it if not already installed)
 2. Open the project:
 
-    [![Open in Dev Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/azure-samples/aisearch-openai-rag-audio)
+    [![Open in Dev Containers](https://img.shields.io/static/v1?style=for-the-badge&label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/navintkr/audio-rag-structured-unstructured-data)
 3. In the VS Code window that opens, once the project files show up (this may take several minutes), open a new terminal.
 
 #### Local environment
@@ -71,7 +79,7 @@ You can run the project in your local VS Code Dev Container using the [Dev Conta
       - **Important**: Ensure you can run `python --version` from console. On Ubuntu, you might need to run `sudo apt install python-is-python3` to link `python` to `python3`.
    - [Powershell](https://learn.microsoft.com/powershell/scripting/install/installing-powershell)
 
-2. Clone the repo (`git clone https://github.com/Azure-Samples/aisearch-openai-rag-audio`)
+2. Clone the repo (`git clone https://github.com/navintkr/audio-rag-structured-unstructured-data`)
 3. Create a Python virtual environment and activate it.
 4. The app needs to know which service endpoints to use for the Azure OpenAI and Azure AI Search. The following variables can be set as environment variables, or you can create a ".env" file in the "app/backend/" directory with this content.
    ```
@@ -81,6 +89,11 @@ You can run the project in your local VS Code Dev Container using the [Dev Conta
    AZURE_SEARCH_ENDPOINT=https://<your service name>.search.windows.net
    AZURE_SEARCH_INDEX=<your index name>
    AZURE_SEARCH_API_KEY=<your api key>
+   OPENAI_CHAT_MODEL=gpt-4o
+   AZURE_SQL_SERVER=<your-SQL-Server-Name>
+   AZURE_SQL_DB=<your-SQL-DB-Name>
+   AZURE_SQL_USERNAME=<your-SQL-Server-Username>
+   AZURE_SQL_PWD=<your-SQL-Server-Password>
    ```
    To use Entra ID (your user when running locally, managed identity when deployed) simply don't set the keys.  
 5. Run this command to start the app:
@@ -106,6 +119,7 @@ Once the app is running, when you navigate to the URL above you should see the s
 
 ### Frontend: enabling direct communication with AOAI Realtime API
 You can make the frontend skip the middle tier and talk to the websockets AOAI Realtime API directly, if you choose to do so. However note this'll stop RAG from happening, and will requiring exposing your API key in the frontend which is very insecure. DO NOT use this in production.
+You can use the dropdown to tweak between structured and unstructured data
 
 Just Pass some extra parameters to the `useRealtime` hook:
 ```typescript
@@ -117,7 +131,3 @@ const { startSession, addUserAudio, inputAudioBufferClear } = useRealTime({
         ...
 );
 ```
-
-### Notes
-
->Sample data: The PDF documents used in this demo contain information generated using a language model (Azure OpenAI Service). The information contained in these documents is only for demonstration purposes and does not reflect the opinions or beliefs of Microsoft. Microsoft makes no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability or availability with respect to the information contained in this document. All rights reserved to Microsoft.

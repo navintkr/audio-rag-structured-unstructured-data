@@ -1,0 +1,147 @@
+CREATE CUSTOMER TABLE:
+---------------------
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Customers](
+	[CustomerID] [int] NOT NULL,
+	[CustomerName] [varchar](255) NULL,
+	[Email] [varchar](255) NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Customers] ADD PRIMARY KEY CLUSTERED 
+(
+	[CustomerID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+#######################################################
+CREATE ORDERS TABLE:
+-------------------
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Orders](
+	[OrderID] [int] NOT NULL,
+	[CustomerID] [int] NULL,
+	[OrderDate] [date] NULL,
+	[TotalAmount] [decimal](10, 2) NULL
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Orders] ADD PRIMARY KEY CLUSTERED 
+(
+	[OrderID] ASC
+)WITH (STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ONLINE = OFF, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Orders]  WITH CHECK ADD FOREIGN KEY([CustomerID])
+REFERENCES [dbo].[Customers] ([CustomerID])
+GO
+######################################################
+INSERT CUSTOMERS TABLE:
+----------------------
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (1,'John Doe','john.doe@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (2,'Jane Smith','jane.smith@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (3,'Alice Johnson','alice.johnson@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (4,'Michael Brown','michael.brown@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (5,'Emily Wilson','emily.wilson@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (6,'David Taylor','david.taylor@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (7,'Sarah Martinez','sarah.martinez@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (8,'James Anderson','james.anderson@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (9,'Jennifer Thomas','jennifer.thomas@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (10,'Daniel White','daniel.white@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (11,'Jessica Lee','jessica.lee@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (12,'Matthew Harris','matthew.harris@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (13,'Olivia Clark','olivia.clark@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (14,'Andrew King','andrew.king@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (15,'Sophia Wright','sophia.wright@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (16,'Ethan Hill','ethan.hill@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (17,'Isabella Green','isabella.green@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (18,'William Baker','william.baker@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (19,'Ava Adams','ava.adams@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (20,'Alexander Allen','alexander.allen@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (21,'Mia Parker','mia.parker@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (22,'Michael Scott','michael.scott@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (23,'Abigail Evans','abigail.evans@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (24,'Jayden Murphy','jayden.murphy@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (25,'Grace Turner','grace.turner@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (26,'Logan Hall','logan.hall@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (27,'Chloe Young','chloe.young@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (28,'Christopher Wright','christopher.wright@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (29,'Natalie Rodriguez','natalie.rodriguez@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (30,'Aiden Martinez','aiden.martinez@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (31,'Zoe Martinez','zoe.martinez@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (32,'Madison Rivera','madison.rivera@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (33,'Benjamin Reed','benjamin.reed@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (34,'Avery Mitchell','avery.mitchell@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (35,'Elijah Perez','elijah.perez@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (36,'Liam Campbell','liam.campbell@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (37,'Charlotte Flores','charlotte.flores@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (38,'Scarlett Collins','scarlett.collins@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (39,'Mason Washington','mason.washington@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (40,'Lucas Parker','lucas.parker@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (41,'Aria Cooper','aria.cooper@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (42,'Harper Morris','harper.morris@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (43,'Evelyn Rogers','evelyn.rogers@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (44,'Jackson Sanchez','jackson.sanchez@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (45,'Amelia Long','amelia.long@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (46,'Ella Peterson','ella.peterson@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (47,'Daniel Wright','daniel.wright@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (48,'Nathan Ramirez','nathan.ramirez@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (49,'Lily Hill','lily.hill@example.com')
+INSERT INTO dbo.Customers (CustomerID,CustomerName,Email) values (50,'Carter Murphy','carter.murphy@example.com')
+#########################################################################################################################
+INSERT ORDERS TABLE:
+-------------------
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (101,1,2024-02-20,150.00)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (102,1,'2024-02-22',75.50)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (103,2,'2024-02-21',200.00)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (104,3,'2024-02-23',120.25)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (105,4,'2024-02-24',80.00)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (106,5,'2024-02-25',100.75)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (107,6,'2024-02-26',300.50)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (108,7,'2024-02-27',50.25)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (109,8,'2024-02-28',150.00)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (110,9,'2024-02-29',200.00)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (111,10,'2024-03-01',75.50)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (112,11,'2024-03-02',125.25)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (113,12,'2024-03-03',90.00)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (114,13,'2024-03-04',180.75)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (115,14,'2024-03-05',220.50)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (116,15,'2024-03-06',150.25)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (117,16,'2024-03-07',100.00)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (118,17,'2024-03-08',75.50)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (119,18,'2024-03-09',200.75)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (120,19,'2024-03-10',90.50)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (121,20,'2024-03-11',180.25)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (122,21,'2024-03-12',300.00)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (123,22,'2024-03-13',50.75)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (124,23,'2024-03-14',75.50)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (125,24,'2024-03-15',150.25)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (126,25,'2024-03-16',180.50)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (127,26,'2024-03-17',220.75)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (128,27,'2024-03-18',90.00)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (129,28,'2024-03-19',100.75)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (130,29,'2024-03-20',125.50)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (131,30,'2024-03-21',75.25)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (132,31,'2024-03-22',90.00)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (133,32,'2024-03-23',150.75)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (134,33,'2024-03-24',200.50)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (135,34,'2024-03-25',80.25)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (136,35,'2024-03-26',150.00)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (137,36,'2024-03-27',100.75)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (138,37,'2024-03-28',180.50)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (139,38,'2024-03-29',220.25)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (140,39,'2024-03-30',90.00)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (141,40,'2024-03-31',100.75)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (142,41,'2024-04-01',75.50)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (143,42,'2024-04-02',200.25)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (144,43,'2024-04-03',150.00)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (145,44,'2024-04-04',100.75)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (146,45,'2024-04-05',125.50)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (147,46,'2024-04-06',75.25)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (148,47,'2024-04-07',90.00)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (149,48,'2024-04-08',150.75)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (150,49,'2024-04-09',200.50)
+INSERT INTO dbo.orders (OrderID,CustomerID,OrderDate,TotalAmount) values (151,50,'2024-04-10',80.25)
+#####################################################################################################
